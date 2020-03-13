@@ -1,12 +1,11 @@
 package com.movielovers.service;
 
-import java.util.Optional;
+import java.util.Date;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.movielovers.model.Actor;
-import com.movielovers.model.pk.ActorPK;
 import com.movielovers.repository.ActorRepository;
 
 @Named("actorService")
@@ -20,13 +19,8 @@ public class ActorServiceImpl implements ActorService {
 	}
 	
 	@Override
-	public Actor findActorByName(final String name) {
-		return actorRepository.findByActorPKName(name);
-	}
-	
-	@Override
-	public Optional<Actor> findActorById(final ActorPK actorPK) {
-		return actorRepository.findById(actorPK);
+	public Actor findActorByName(final String name, final Date bornDate) {
+		return actorRepository.findActorByNameAndBornDate(name, bornDate);
 	}
 	
 	@Override

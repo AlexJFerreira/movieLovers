@@ -19,7 +19,7 @@ public class OmdbUtils {
 		return Integer.valueOf(trim(remove(durationTime, "min")));
 	}
 	
-	public static Set<Actor> extractActors(final String actors) {
+	public static Set<Actor> extractAndSetActors(final String actors) {
 		final List<String> actorsList = List.of(actors.split(","));
 		return actorsList.stream().map(Actor::new).collect(Collectors.toSet());
 	}

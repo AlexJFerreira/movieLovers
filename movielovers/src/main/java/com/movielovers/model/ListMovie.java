@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -23,9 +22,8 @@ public class ListMovie implements Serializable {
     @Column(name="list_movie_id", unique=true, nullable=false, precision=10)
     private int listMovieId;
 
-	@ManyToOne 
-    @JoinColumn(name="original_title")
-    @JoinColumn(name="premiere_year")
+	@ManyToOne
+	@JoinColumn(name = "movie_id",  unique=true)
 	private Movie movie;
 
 	@ManyToOne

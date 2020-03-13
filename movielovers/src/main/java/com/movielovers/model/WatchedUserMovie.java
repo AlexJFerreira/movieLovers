@@ -2,26 +2,38 @@ package com.movielovers.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-//@Entity(name="watched_user_movie")
+@Entity(name="watched_user_movie")
 public class WatchedUserMovie implements Serializable {
 
 	private static final long serialVersionUID = 1L;
   
-//	@ManyToOne
-//    @JoinColumn(name="original_title")
-//    @JoinColumn(name="premiere_year")
-	private Movie movie; 
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="watched_user_movie_id", unique=true, nullable=false, precision=10)
+    private int watchedUserMovieId;
+	
+	@ManyToOne
+    @JoinColumn(name="movie_id")
+    private Movie movie; 
     
-//	@ManyToOne
-//    @JoinColumn(name="user_id")
+	@ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 	
+    public int getWatchedUserMovieId() {
+        return watchedUserMovieId;
+    }
+
     public Movie getMovie() {
         return movie;
     }
