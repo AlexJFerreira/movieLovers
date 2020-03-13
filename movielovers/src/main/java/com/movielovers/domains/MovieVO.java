@@ -16,13 +16,13 @@ public class MovieVO implements Serializable {
 
 	public MovieVO(final Movie movie) {
 		this.translatedTitle = movie.getTranslatedTitle();
-		this.originalTitle = movie.getOriginalTitle();
+		this.originalTitle = movie.getMoviePK().getOriginalTitle();
 		this.plot = movie.getPlot();
 		this.genre = movie.getGenre();
 		this.country = movie.getCountry();
 		this.language = movie.getLanguage();
 		this.upvotes = movie.getUpvotes();
-		this.premiereYear = movie.getPremiereYear();
+		this.premiereYear = movie.getMoviePK().getPremiereYear();
 		this.durationMinutes = movie.getDurationMinutes();
 		this.actors = movie.getActors();
 		this.directors = movie.getDirectors();
