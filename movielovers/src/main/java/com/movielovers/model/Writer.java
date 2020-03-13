@@ -1,66 +1,41 @@
 package com.movielovers.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.movielovers.model.pk.WriterPK;
 
 @Entity(name = "writer")
 public class Writer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public Writer(String name) {
-		this.name = name;
+		this.writerPK = new WriterPK(name, new Date());
 	}
+	
+	public Writer() {}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "writer_id", unique = true, nullable = false, precision = 10)
-	private int writerId;
-
-	@Column(length = 150)
-	private String name;
-
-	@Column(name = "born_date")
-	private LocalDate bornDate;
+	@EmbeddedId
+	@Column(unique = true, nullable = false)
+	private WriterPK writerPK;
 
 	@Column(length = 150)
 	private String nationality;
 
-
-	@ManyToMany(mappedBy="writers", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(mappedBy = "writers")
 	@JsonIgnore
 	private Set<Movie> movies = new HashSet<>();
-
-	public int getWriterId() {
-		return writerId;
-	}
-
-	public void setWriterId(int writerId) {
-		this.writerId = writerId;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-	public LocalDate getBornDate() {
-		return bornDate;
-	}
 
 	public String getNationality() {
 		return nationality;
@@ -70,20 +45,25 @@ public class Writer implements Serializable {
 		return movies;
 	}
 	
+	public WriterPK getWriterPK() {
+		return writerPK;
+	}
+
+	public void setWriterPK(WriterPK writerPK) {
+		this.writerPK = writerPK;
+	}
+
 	public void addMovie(Movie movie) {
-    	movies.add(movie);
-    	movie.getWriters().add(this);
-    }
+		movies.add(movie);
+		movie.getWriters().add(this);
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bornDate == null) ? 0 : bornDate.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((nationality == null) ? 0 : nationality.hashCode());
-		result = prime * result + writerId;
-		result = prime * result + ((movies == null) ? 0 : movies.hashCode());
+		result = prime * result + ((writerPK == null) ? 0 : writerPK.hashCode());
 		return result;
 	}
 
@@ -96,27 +76,15 @@ public class Writer implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Writer other = (Writer) obj;
-		if (bornDate == null) {
-			if (other.bornDate != null)
-				return false;
-		} else if (!bornDate.equals(other.bornDate))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (nationality == null) {
 			if (other.nationality != null)
 				return false;
 		} else if (!nationality.equals(other.nationality))
 			return false;
-		if (writerId != other.writerId)
-			return false;
-		if (movies == null) {
-			if (other.movies != null)
+		if (writerPK == null) {
+			if (other.writerPK != null)
 				return false;
-		} else if (!movies.equals(other.movies))
+		} else if (!writerPK.equals(other.writerPK))
 			return false;
 		return true;
 	}
