@@ -3,10 +3,9 @@ package com.movielovers.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.movielovers.model.Actor;
-import com.movielovers.model.pk.ActorPK;
 
-public interface ActorRepository extends JpaRepository<Actor, ActorPK> {
+public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	
-	public Actor findByActorPKName(String name);
+	public Actor findByName(String name);
 
 }
