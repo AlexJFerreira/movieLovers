@@ -1,5 +1,7 @@
 package com.movielovers.service;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,14 +18,15 @@ public class DirectorServiceImpl implements DirectorService {
 			this.directorRepository = directorRepository;
 		}
 		
-//		@Override
-//		public Optional<Director> findDirectorById(final DirectorPK directorPK) {
-//			return directorRepository.findById(directorPK);
-//		}
 		
 		@Override
 		public void persistNewDirector(final Director director) {
 			directorRepository.save(director);
+		}
+		
+		@Override
+		public Director findDirectorByNameAndBornDate(final String name, final LocalDate bornDate) {
+			return directorRepository.findDirectorByNameAndBornDate(name, bornDate);
 		}
 
 

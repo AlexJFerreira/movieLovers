@@ -26,7 +26,7 @@ public class OmdbConsumerController {
 	private final Logger logger = LoggerFactory.getLogger(OmdbConsumerController.class);
 	private final MovieBusinessImpl movieBusiness;
 	private final RestTemplate restTemplate;
-	private final String OMB_URL = "http://www.omdbapi.com/?apikey=8dbada7c&t=%s&y=%s";
+	private static final String OMB_URL = "http://www.omdbapi.com/?apikey=8dbada7c&t=%s&y=%s";
 	
 	@Inject
 	public OmdbConsumerController(final MovieBusinessImpl movieBusiness, final RestTemplate restTemplate) {

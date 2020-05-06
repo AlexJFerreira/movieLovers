@@ -23,7 +23,8 @@ public class Director implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public Director(String name) {
-		this.name = name;
+		this.name = name.strip();
+		this.bornDate = LocalDate.now(); 
 	}
 	
 	public Director() {}
@@ -81,10 +82,7 @@ public class Director implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bornDate == null) ? 0 : bornDate.hashCode());
-		result = prime * result + directorId;
-		result = prime * result + ((movies == null) ? 0 : movies.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((nationality == null) ? 0 : nationality.hashCode());
 		return result;
 	}
 
@@ -102,29 +100,20 @@ public class Director implements Serializable {
 				return false;
 		} else if (!bornDate.equals(other.bornDate))
 			return false;
-		if (directorId != other.directorId)
-			return false;
-		if (movies == null) {
-			if (other.movies != null)
-				return false;
-		} else if (!movies.equals(other.movies))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (nationality == null) {
-			if (other.nationality != null)
-				return false;
-		} else if (!nationality.equals(other.nationality))
-			return false;
 		return true;
 	}
+	
+
 
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
 
 }

@@ -6,4 +6,6 @@ import com.movielovers.model.Movie;
 
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
+	Movie findWriterByOriginalTitleAndPremiereYear(String originalTitle, Integer premiereYear);
+
 }

@@ -1,5 +1,7 @@
 package com.movielovers.service;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,10 +18,10 @@ public class WriterServiceImpl implements WriterService {
 		this.writerRepository = writerRepository;
 	}
 	
-//	@Override
-//	public Optional<Writer> findWriterById(final WriterPK writerPK) {
-//		return writerRepository.findById(writerPK);
-//	}
+	@Override
+	public Writer findWriterByNameAndBornDate(final String name, final LocalDate bornDate) {
+		return writerRepository.findWriterByNameAndBornDate(name, bornDate);
+	}
 	
 	@Override
 	public void persistNewActor(final Writer writer) {

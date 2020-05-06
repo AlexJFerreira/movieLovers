@@ -23,8 +23,12 @@ public class Writer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public Writer(String name) {
-		this.name = name;
+		this.name = name.strip();
+		this.bornDate = LocalDate.now(); 	
 	}
+	
+	public Writer() {}
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,15 +79,13 @@ public class Writer implements Serializable {
     	movie.getWriters().add(this);
     }
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bornDate == null) ? 0 : bornDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((nationality == null) ? 0 : nationality.hashCode());
-		result = prime * result + writerId;
-		result = prime * result + ((movies == null) ? 0 : movies.hashCode());
 		return result;
 	}
 
@@ -105,18 +107,6 @@ public class Writer implements Serializable {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (nationality == null) {
-			if (other.nationality != null)
-				return false;
-		} else if (!nationality.equals(other.nationality))
-			return false;
-		if (writerId != other.writerId)
-			return false;
-		if (movies == null) {
-			if (other.movies != null)
-				return false;
-		} else if (!movies.equals(other.movies))
 			return false;
 		return true;
 	}

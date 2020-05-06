@@ -11,4 +11,6 @@ public interface MovieService {
 
 	public void persistNewMovie(Movie movie);
 
+	Movie findMovieByOriginalTitleAndPremiereYear(String originalTitle, Integer premiereYear);
+
 }

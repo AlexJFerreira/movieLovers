@@ -26,6 +26,11 @@ public class MovieServiceImpl implements MovieService {
 		return MovieVO.converteToListMovieVO(movieRepository.findAll());
 	}
 	
+	@Override
+	public Movie findMovieByOriginalTitleAndPremiereYear(final String originalTitle, final Integer premiereYear) {
+		return movieRepository.findWriterByOriginalTitleAndPremiereYear(originalTitle, premiereYear);
+	}
+	
 	@Transactional
 	@Override
 	public void persistNewMovie(Movie movie) {

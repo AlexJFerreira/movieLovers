@@ -1,7 +1,7 @@
 package com.movielovers.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +24,7 @@ public class Actor implements Serializable {
 	
 	public Actor(String name) {
 		this.name = name.strip();
-		this.bornDate = new Date(); 
+		this.bornDate = LocalDate.now(); 
 	}
 	
 	public Actor() {}
@@ -41,7 +41,7 @@ public class Actor implements Serializable {
 	private String nationality;
 
 	@Column(name = "born_date")
-	private Date bornDate;
+	private LocalDate bornDate;
 
 	@ManyToMany(mappedBy="actors", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JsonIgnore
@@ -63,7 +63,7 @@ public class Actor implements Serializable {
 		return nationality;
 	}
 
-	public Date getBornDate() {
+	public LocalDate getBornDate() {
 		return bornDate;
 	}
 
@@ -79,7 +79,7 @@ public class Actor implements Serializable {
 		this.nationality = nationality;
 	}
 
-	public void setBornDate(Date bornDate) {
+	public void setBornDate(LocalDate bornDate) {
 		this.bornDate = bornDate;
 	}
 
@@ -92,14 +92,14 @@ public class Actor implements Serializable {
     	movie.getActors().add(this);
     }
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + actorId;
 		result = prime * result + ((bornDate == null) ? 0 : bornDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((nationality == null) ? 0 : nationality.hashCode());
 		return result;
 	}
 
@@ -112,8 +112,6 @@ public class Actor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Actor other = (Actor) obj;
-		if (actorId != other.actorId)
-			return false;
 		if (bornDate == null) {
 			if (other.bornDate != null)
 				return false;
@@ -123,11 +121,6 @@ public class Actor implements Serializable {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (nationality == null) {
-			if (other.nationality != null)
-				return false;
-		} else if (!nationality.equals(other.nationality))
 			return false;
 		return true;
 	}

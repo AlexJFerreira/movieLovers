@@ -1,6 +1,6 @@
 package com.movielovers.service;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.movielovers.model.Actor;
 
@@ -8,6 +8,6 @@ public interface ActorService {
 
 	public void persistNewActor(Actor actor);
 
-	Actor findActorByName(String name, Date bornDate);
+	Actor findActorByNameAndBornDate(String name, LocalDate bornDate);
 
 }

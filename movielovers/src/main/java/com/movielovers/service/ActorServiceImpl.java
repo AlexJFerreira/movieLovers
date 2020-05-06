@@ -1,6 +1,6 @@
 package com.movielovers.service;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,7 +19,7 @@ public class ActorServiceImpl implements ActorService {
 	}
 	
 	@Override
-	public Actor findActorByName(final String name, final Date bornDate) {
+	public Actor findActorByNameAndBornDate(final String name, final LocalDate bornDate) {
 		return actorRepository.findActorByNameAndBornDate(name, bornDate);
 	}
 	
